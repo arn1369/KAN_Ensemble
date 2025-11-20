@@ -1,0 +1,30 @@
+# Project Configuration
+
+data:
+  domain: "Communication Services"  # Target Sector/Domain (e.g., Technology, Healthcare, Financial Services)
+  count: 5              # Number of stocks to fetch from this domain
+  lookback: 30          # Window size for sequence generation
+  start_date: "2021-01-01"
+  end_date: "2025-01-01"
+
+model:
+  hidden_dim: 64
+  output_dim: 1
+  kan_layers: [64]      # Hidden layers for KAN
+  lstm_layers: 2        # Number of layers for BiLSTM
+  dropout: 0.2
+
+training:
+  epochs: 50
+  learning_rate: 0.001
+  batch_size: 32
+  percentage: 0.8       # Percentage of data to use for training
+
+volatility:
+  threshold: 0.40       # Annualized volatility threshold to switch models (40%)
+
+ensemble:
+  enabled: true
+  size: 5               # Number of models in the ensemble
+  window: 5             # Lookback window for adaptive weighting (days)
+  strategy: "adaptive"  # "adaptive" (weighted by recent error) or "mean" (simple average)
